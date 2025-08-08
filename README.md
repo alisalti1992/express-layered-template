@@ -1,100 +1,94 @@
 # SiteScope
 
-SiteScope is a web application for SEO professionals to crawl websites, capture screenshots, generate SEO reports, and monitor website performance. Built with Node.js, React, PostgreSQL, and RabbitMQ, it is designed for easy deployment with Docker.
+SiteScope is a web application for crawling websites, capturing screenshots, and generating SEO reports. Built for Move Ahead Media, it provides an easy-to-use platform to analyze websites for SEO optimization.
 
-## Features
+---
 
-- User Management (Admin and Users)
-- Crawl Websites for SEO data
-- Screenshot pages using headless Chrome (Puppeteer)
-- Job queue system with RabbitMQ
-- Basic Reporting and report generation (PDF/HTML)
-- User History and Logs
-- REST API backend
-- React-based User Interface
-- Crawl Settings customization
+## Features (MVP)
+- User Management with Admin and Paid Users (token system planned)
+- Basic website crawl for SEO metadata
+- Screenshot capture of crawled pages using headless Chrome
+- Simple reporting UI
+- Crawl settings with URL input
+- Docker compatible for easy deployment
+
+---
 
 ## Tech Stack
+- Backend: Laravel (PHP)
+- Database: PostgreSQL
+- Frontend: Blade
+- Screenshot service: Headless Chrome
+- Containerization: Docker
 
-- Backend: Node.js with Express  
-- Frontend: React  
-- Database: PostgreSQL  
-- Queue: RabbitMQ  
-- Screenshot service: Puppeteer (headless Chrome)  
-- Containerization: Docker  
+---
 
 ## Installation
 
-### Prerequisites
+### Requirements
+- PHP >= 8.x
+- Composer
+- PostgreSQL
+- Docker & Docker Compose (optional for containerized setup)
+- Node.js & npm (for headless Chrome setup if using Node service)
 
-- Docker & Docker Compose installed  
-- Node.js and npm (for local development without Docker)  
-- PostgreSQL instance (if not using Dockerized one)
+### Setup
 
-### Using Docker
+1. Clone the repository
+   ```bash
+   git clone https://github.com/your-org/sitescope.git
+   cd sitescope
+   ```
 
-1. Clone the repository  
-```bash
-git clone https://github.com/moveaheadmedia/sitescope.git
-cd sitescope
-```
+2. Install PHP dependencies
+   ```bash
+   composer install
+   ```
 
-2. Build and start containers  
-```bash
-docker-compose up --build
-```
+3. Setup environment variables  
+   Copy `.env.example` to `.env` and configure your database and app settings.
 
-3. Access the app UI at `http://localhost:3000` (default)
+4. Generate app key
+   ```bash
+   php artisan key:generate
+   ```
 
-### Local Development (Without Docker)
+5. Run migrations
+   ```bash
+   php artisan migrate
+   ```
 
-1. Backend setup  
-```bash
-cd backend
-npm install
-npm run dev
-```
+6. Run the application
+   ```bash
+   php artisan serve
+   ```
 
-2. Frontend setup  
-```bash
-cd frontend
-npm install
-npm start
-```
+7. (Optional) Run headless Chrome screenshot service or configure your Laravel integration.
 
-3. Make sure PostgreSQL and RabbitMQ are running locally or via Docker.
+---
 
 ## Usage
 
-- Admin users can create and manage users via the UI or API.  
-- Users can submit crawl jobs with specific settings.  
-- Crawl jobs run asynchronously using RabbitMQ queue.  
-- Crawled pages are captured, screenshots taken, and data stored.  
-- Reports can be viewed and exported from the UI.
+- Admin users can create and manage other users.
+- Users can input URLs to crawl and view SEO reports and screenshots.
+- Reports and crawl history will be available in the user interface.
 
-## API Overview
+---
 
-- `/api/auth` - Authentication endpoints  
-- `/api/users` - User management (admin only)  
-- `/api/crawls` - Submit crawl jobs, check status, get results  
-- `/api/reports` - Generate and download reports
+## API
 
-(Full API documentation to be added)
+*API endpoints planned for future releases.*
 
-## Roadmap
-
-- Token-based paid users and billing integration  
-- Advanced SEO metrics and analytics  
-- Scheduled recurring crawls  
-- Multi-user teams and permissions  
-- Enhanced reporting and notifications
+---
 
 ## Contributing
 
-Contributions are welcome! Please fork the repo, create feature branches, and submit pull requests. Follow coding standards and write tests.
+Contributions are welcome! Please open issues or submit pull requests.
+
+---
 
 ## License
 
-[MIT License](LICENSE)
+MIT License
 
 ---

@@ -1,108 +1,84 @@
-# SiteScope — DEVELOPMENT
+# SiteScope Development Plan
 
-## Project Overview  
-SiteScope is a web application designed for SEO professionals and website owners to crawl websites, capture screenshots, generate reports, and monitor SEO metrics. It supports user management, job queuing, and detailed logging, built for easy deployment with Docker.
-
----
-
-## Tech Stack  
-- **Backend:** Node.js with Express  
-- **Database:** PostgreSQL  
-- **Frontend:** React  
-- **Queue:** RabbitMQ  
-- **Screenshot Service:** Headless Chrome (Puppeteer)  
-- **Containerization:** Docker  
+## Overview
+SiteScope is a web application for Move Ahead Media to crawl websites for SEO analysis, capture screenshots, and generate reports. The MVP will focus on user management and basic crawl/report features. It will be built with Laravel (backend), PostgreSQL (database), Blade (frontend), and use headless Chrome for screenshots. Docker compatibility is essential for easy deployment.
 
 ---
 
-## Features & Roadmap
-
-### Phase 1 — MVP (Initial Features)  
-- [x] Docker-compatible setup  
-- [x] User Management  
-  - Admin user (can create/manage users)  
-  - Paid users (token system planned for later)  
-- [x] REST API for all core features  
-- [x] User History and Logs  
-- [x] Basic UI (React)  
-- [x] Queue system with RabbitMQ for crawl jobs  
-- [x] Crawl functionality (fetch pages, extract SEO data)  
-- [x] Screenshot pages via Puppeteer  
-- [x] Basic Reporting (summary of crawl results)  
-- [x] Crawl Settings (URL, depth, delay, etc.)  
-- [x] Report Generator (PDF/HTML exports)  
-
-### Phase 2 — Enhanced Features (Future)  
-- Token-based paid users & billing integration  
-- Advanced SEO metrics (backlinks, speed, keywords)  
-- User notifications & alerts  
-- Multi-user teams and permissions  
-- Scheduled recurring crawls  
-- More detailed analytics dashboards  
+## Tech Stack
+- Backend: Laravel (PHP)
+- Database: PostgreSQL
+- Frontend: Blade templating engine
+- Screenshot: Headless Chrome (Puppeteer or Laravel wrapper)
+- Queue System: **Not included for MVP** (planned for future)
+- Containerization: Docker
 
 ---
 
-## Architecture Overview
+## Features & Milestones
 
-```plaintext
-+--------------+      +-----------------+      +--------------+
-|  Frontend    | <--> |  REST API       | <--> |  PostgreSQL  |
-| (React app)  |      | (Node.js/Express)|     |  (User, Crawl|
-+--------------+      +-----------------+      |   Data, Logs)|
-                          |       |             +--------------+
-                          |       |
-                     +----v-------v-----+
-                     |   RabbitMQ Queue  |
-                     +----+-------+-----+
-                          |       |
-                +---------v-+   +-v----------+
-                | Crawl Worker|  | Screenshot|
-                | (Node.js)  |  | Service   |
-                +------------+  +-----------+
-```
+### Phase 1: MVP - Core User Management + Basic Crawl
+- User Management
+    - Admin users with ability to create/manage other users
+    - Paid users (token system) **planned for later**
+- Authentication (Laravel built-in auth)
+- Basic Crawl Function
+    - Crawl a single URL for SEO data (e.g. meta tags, headers)
+    - Capture screenshot of the crawled page
+- Basic Reporting UI
+    - View crawl results and screenshot
+- Crawl Settings (simple form for URL input)
+- Dockerize the application for deployment
 
----
+### Phase 2: User History and Logs
+- Store crawl jobs per user
+- View crawl history in UI
+- Basic logs for crawling and errors
 
-## Development Milestones & Timeline  
+### Phase 3: REST API
+- Expose endpoints for user management and crawling
+- Token-based authentication for API
 
-| Milestone               | Description                               | Status      | Notes                      |
-|-------------------------|-------------------------------------------|-------------|----------------------------|
-| Project setup & Docker   | Setup repo, Dockerfile, basic Express API | In Progress |                            |
-| User Management API      | Admin user creation, user endpoints       | Pending     |                            |
-| REST API for Crawling    | Crawl job submission, status, results     | Pending     |                            |
-| RabbitMQ Queue Setup     | Job queue integration & worker             | Pending     |                            |
-| Screenshot Functionality | Puppeteer integration for screenshots      | Pending     |                            |
-| Frontend MVP             | Basic React UI for login, crawl submission| Pending     |                            |
-| Reporting Module         | Generate and download crawl reports        | Pending     |                            |
+### Phase 4: Queue System Integration
+- Implement Laravel queues (Redis or database driver)
+- Async crawling jobs
+- Background screenshot capture
 
----
-
-## Progress Tracker  
-_Update this section regularly to mark completed tasks_
-
-- [x] Decide project name: SiteScope  
-- [x] Choose tech stack  
-- [x] Initial project outline and docs  
-- [ ] Setup repo and Docker environment  
-- [ ] Implement user management (admin & users)  
-- [ ] Develop REST API endpoints for crawl jobs  
-- [ ] Integrate RabbitMQ and crawl worker  
-- [ ] Implement screenshot capture with Puppeteer  
-- [ ] Build React frontend UI  
-- [ ] Create basic reporting feature  
+### Phase 5: Advanced Reporting & Settings
+- Advanced SEO reports (links, speed metrics)
+- Customizable crawl options
+- Export reports (PDF/CSV)
 
 ---
 
-## Contribution Guidelines  
-- Use feature branches for new functionality  
-- Follow Node.js and React best practices  
-- Write tests for API endpoints and workers  
-- Update docs and this file with progress notes  
+## Development Workflow
+- Follow feature branch workflow: `feature/xxx`
+- Pull Requests for code review before merging to `main`
+- Use Git tags to mark releases (e.g. v0.1.0, v0.2.0)
 
 ---
 
-## Notes  
-- PostgreSQL schema to be designed for users, jobs, crawl results, logs  
-- RabbitMQ to handle job queuing asynchronously  
-- Puppeteer will run in headless mode within Docker container  
-- React UI will authenticate users, submit crawl jobs, show reports  
+## Current Progress Marker
+
+| Feature                        | Status         | Notes                            |
+|-------------------------------|----------------|---------------------------------|
+| Project setup & Docker config  | Not started    |                                 |
+| User Management               | Not started    | Admin & paid users (MVP)         |
+| Authentication                | Not started    | Laravel built-in auth            |
+| Basic Crawl Function          | Not started    | Single URL, SEO data extraction  |
+| Screenshot Capture            | Not started    | Headless Chrome integration      |
+| Basic Reporting UI            | Not started    | Show crawl results and screenshot|
+| Crawl Settings               | Not started    | URL input form                   |
+| User History & Logs           | Planned        | For Phase 2                     |
+| REST API                     | Planned        | For Phase 3                     |
+| Queue System                 | Planned        | For Phase 4                     |
+| Advanced Reporting            | Planned        | For Phase 5                     |
+
+---
+
+## Notes
+- Paid users and token-based access will be designed but deferred to later phases.
+- Headless Chrome integration can be done with Laravel wrappers or external Node.js service called from Laravel.
+- Focus on security, especially in user authentication and data isolation.
+
+---
