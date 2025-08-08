@@ -35,7 +35,7 @@ SiteScope is a web application for SEO professionals to crawl websites, capture 
 
 1. Clone the repository  
 ```bash
-git clone https://your-repo-url.git
+git clone https://github.com/moveaheadmedia/sitescope.git
 cd sitescope
 ```
 
