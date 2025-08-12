@@ -33,7 +33,7 @@ npm run build
 npm start
 
 # Database operations
-npx prisma migrate dev     # Run migrations in development
+npx prisma dev             # Start Prisma Postgres server (required first)
 npx prisma generate        # Generate Prisma client
 npx prisma studio         # Open Prisma Studio GUI
 npx prisma db push        # Push schema to database
@@ -63,22 +63,30 @@ docker-compose logs      # View logs
 ✅ Phase 1: Basic Node.js Setup - COMPLETED
 ✅ Phase 2: Express.js Foundation - COMPLETED  
 ✅ Phase 3: Code Quality Setup - COMPLETED
-🔄 Phase 4: Prisma Setup (Current)
+✅ Phase 4: Prisma Setup - COMPLETED
+🔄 Phase 5: Testing Framework (Current)
 - See DEVELOPMENT.md for complete phase breakdown
 
 ## Current Project Structure
 
 ```
 ├── src/
+│   ├── lib/
+│   │   └── prisma.ts      # Prisma client singleton
+│   ├── generated/
+│   │   └── prisma/        # Generated Prisma client (gitignored)
 │   └── index.ts           # Express server with middleware & health check
+├── prisma/
+│   └── schema.prisma      # Database schema with User, CrawlJob, Page models
 ├── dist/                  # Compiled JavaScript output
 ├── node_modules/          # Dependencies
-├── package.json           # Project config with dev scripts
+├── package.json           # Project config with Prisma dependencies
 ├── package-lock.json      # Dependency lock file
 ├── tsconfig.json          # TypeScript configuration
 ├── eslint.config.js       # ESLint configuration
 ├── .prettierrc            # Prettier formatting rules
 ├── .prettierignore        # Prettier ignore patterns
+├── .env                   # Database connection string
 ├── .env.example           # Environment variables template
 ├── .gitignore            # Git ignore rules
 ├── DEVELOPMENT.md         # Phase-by-phase development plan
@@ -119,9 +127,11 @@ src/
 - Return consistent error response format
 
 ### Database
-- All database operations through Prisma
+- All database operations through Prisma client (import from `src/lib/prisma.ts`)
+- Database models: User, CrawlJob, Page with full TypeScript support
 - Use transactions for multi-step operations
-- Follow migration-first approach
+- Current setup: Prisma Postgres for development (run `npx prisma dev` to start)
+- Generated client available with full type safety
 
 ### Testing
 - Write tests for all endpoints

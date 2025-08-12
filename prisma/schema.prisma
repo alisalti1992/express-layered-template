@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model for basic authentication and ownership
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  crawlJobs CrawlJob[]
+
+  @@map("users")
+}
+
+// Crawl job represents a website crawling task
+model CrawlJob {
+  id          String    @id @default(cuid())
+  url         String
+  status      CrawlStatus @default(PENDING)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  completedAt DateTime?
+  
+  // Configuration
+  maxDepth    Int       @default(1)
+  maxPages    Int       @default(10)
+  
+  // Relations
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pages       Page[]
+
+  @@map("crawl_jobs")
+}
+
+// Individual page within a crawl job
+model Page {
+  id            String   @id @default(cuid())
+  url           String
+  title         String?
+  statusCode    Int?
+  contentType   String?
+  screenshotUrl String?
+  crawledAt     DateTime @default(now())
+  
+  // SEO data
+  metaDescription String?
+  h1Tags          String[]
+  h2Tags          String[]
+  wordCount       Int?
+  
+  // Relations
+  crawlJobId    String
+  crawlJob      CrawlJob @relation(fields: [crawlJobId], references: [id], onDelete: Cascade)
+
+  @@map("pages")
+}
+
+enum CrawlStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+}

@@ -122,3 +122,4 @@ test-results/
 # Screenshots and uploads (for future phases)
 uploads/
 screenshots/
+/src/generated/prisma
