@@ -32,6 +32,10 @@ const options: swaggerJsdoc.Options = {
         description: 'Health check endpoints',
       },
       {
+        name: 'Demo',
+        description: 'Demo endpoints showing validation system',
+      },
+      {
         name: 'Users',
         description: 'User management operations (coming soon)',
       },
