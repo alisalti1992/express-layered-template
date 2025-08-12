@@ -49,7 +49,8 @@ npm run test:coverage    # Run tests with coverage
 npm run lint             # Run ESLint
 npm run lint:fix         # Fix ESLint issues
 npm run type-check       # Run TypeScript compiler check
-npm run format           # Run Prettier
+npm run format           # Run Prettier formatting
+npm run format:check     # Check Prettier formatting
 
 # Docker operations
 docker-compose up -d     # Start services in background
@@ -61,7 +62,8 @@ docker-compose logs      # View logs
 
 ✅ Phase 1: Basic Node.js Setup - COMPLETED
 ✅ Phase 2: Express.js Foundation - COMPLETED  
-🔄 Phase 3: Code Quality Setup (Current)
+✅ Phase 3: Code Quality Setup - COMPLETED
+🔄 Phase 4: Prisma Setup (Current)
 - See DEVELOPMENT.md for complete phase breakdown
 
 ## Current Project Structure
@@ -71,9 +73,12 @@ docker-compose logs      # View logs
 │   └── index.ts           # Express server with middleware & health check
 ├── dist/                  # Compiled JavaScript output
 ├── node_modules/          # Dependencies
-├── package.json           # Project config with Express dependencies
+├── package.json           # Project config with dev scripts
 ├── package-lock.json      # Dependency lock file
 ├── tsconfig.json          # TypeScript configuration
+├── eslint.config.js       # ESLint configuration
+├── .prettierrc            # Prettier formatting rules
+├── .prettierignore        # Prettier ignore patterns
 ├── .env.example           # Environment variables template
 ├── .gitignore            # Git ignore rules
 ├── DEVELOPMENT.md         # Phase-by-phase development plan
@@ -101,6 +106,12 @@ src/
 ```
 
 ## Development Guidelines
+
+### Code Quality
+- Use ESLint for code linting with TypeScript support
+- Use Prettier for consistent code formatting
+- Run `npm run lint:fix` and `npm run format` before committing
+- WebStorm automatically detects and applies these configurations
 
 ### Error Handling
 - Use Zod for input validation (Phase 8)

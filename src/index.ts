@@ -22,7 +22,7 @@ app.get('/health', (req, res) => {
     status: 'OK',
     message: 'SiteScope API is running',
     timestamp: new Date().toISOString(),
-    version: '1.0.0'
+    version: '1.0.0',
   });
 });
 
@@ -30,7 +30,7 @@ app.get('/health', (req, res) => {
 app.get('/', (req, res) => {
   res.json({
     message: 'Welcome to SiteScope API',
-    version: '1.0.0'
+    version: '1.0.0',
   });
 });
 
