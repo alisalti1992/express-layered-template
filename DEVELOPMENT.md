@@ -1,34 +1,239 @@
-# SiteScope
+# SiteScope Development Guide
 
-SiteScope is a Laravel-based web application for SEO website crawling, screenshotting, and reporting.
+SiteScope is a Node.js Express application for SEO website crawling, screenshotting, and reporting.
 
-## Features (MVP)
+## Development Phases
 
-- User Management (Admin + Users)
-- Crawl websites for SEO data
-- Screenshot pages using Headless Chrome
-- Basic reporting and logs
-- REST API (planned)
+### Phase 1: Basic Node.js Setup (Current - 2-3 hours)
 
-## Installation
+**Objective**: Initialize Node.js project with TypeScript
 
-1. Clone repo
-2. Run `composer install`
-3. Configure `.env` file
-4. Run migrations `php artisan migrate`
-5. Serve with `php artisan serve`
+#### Tasks:
+- Initialize package.json
+- Install TypeScript and basic dependencies
+- Configure TypeScript compiler
+- Create basic project structure
 
-## Usage
+#### Commands:
+```bash
+npm init -y
+npm install -D typescript @types/node ts-node nodemon
+npx tsc --init
+```
 
-- Admin can create users
-- Users can crawl websites and view reports
+#### Deliverables:
+- package.json with scripts
+- tsconfig.json configured
+- Basic src/ folder structure
 
-## Planned features
+---
 
-- Paid users with token system
-- Job queue system
-- Advanced reporting
+### Phase 2: Express.js Foundation (2-3 hours)
 
-## License
+**Objective**: Set up basic Express server
 
-MIT
+#### Tasks:
+- Install Express and basic middleware
+- Create minimal server
+- Add health check endpoint
+- Configure development server
+
+#### Commands:
+```bash
+npm install express cors helmet morgan dotenv
+npm install -D @types/express
+```
+
+#### Deliverables:
+- Working Express server on port 3000
+- Basic middleware configured
+- Health check endpoint responding
+
+---
+
+### Phase 3: Code Quality Setup (1-2 hours)
+
+**Objective**: Configure ESLint and Prettier
+
+#### Tasks:
+- Install and configure ESLint
+- Set up Prettier
+- Add lint scripts to package.json
+- Configure VS Code settings
+
+#### Commands:
+```bash
+npm install -D eslint prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin
+npm install -D eslint-config-prettier eslint-plugin-prettier
+```
+
+#### Deliverables:
+- ESLint configuration
+- Prettier configuration
+- Lint scripts working
+
+---
+
+### Phase 4: Prisma Setup (2-3 hours)
+
+**Objective**: Initialize Prisma ORM
+
+#### Tasks:
+- Install Prisma
+- Initialize schema
+- Configure database connection
+- Create first model
+
+#### Commands:
+```bash
+npm install prisma @prisma/client
+npx prisma init
+```
+
+#### Deliverables:
+- Prisma schema file
+- Database connection configured
+- First migration ready
+
+---
+
+### Phase 5: Testing Framework (2-3 hours)
+
+**Objective**: Set up Jest testing
+
+#### Tasks:
+- Install Jest and testing utilities
+- Configure test environment
+- Write first test
+- Add test scripts
+
+#### Commands:
+```bash
+npm install -D jest @types/jest supertest @types/supertest ts-jest
+```
+
+#### Deliverables:
+- Jest configuration
+- Basic test structure
+- Sample API test
+
+---
+
+### Phase 6: Docker Setup (2-3 hours)
+
+**Objective**: Containerize application
+
+#### Tasks:
+- Create Dockerfile
+- Set up docker-compose
+- Configure PostgreSQL service
+- Test containerized setup
+
+#### Deliverables:
+- Dockerfile
+- docker-compose.yml
+- Working containerized environment
+
+---
+
+### Phase 7: API Documentation (2 hours)
+
+**Objective**: Set up Swagger/OpenAPI
+
+#### Tasks:
+- Install Swagger dependencies
+- Configure OpenAPI spec
+- Add documentation middleware
+- Document existing endpoints
+
+#### Commands:
+```bash
+npm install swagger-ui-express swagger-jsdoc
+npm install -D @types/swagger-ui-express
+```
+
+#### Deliverables:
+- Swagger UI accessible
+- API documentation structure
+
+---
+
+### Phase 8: Input Validation (2 hours)
+
+**Objective**: Add request validation
+
+#### Tasks:
+- Install Zod for validation
+- Create validation middleware
+- Add input validation to endpoints
+- Error handling setup
+
+#### Commands:
+```bash
+npm install zod express-rate-limit
+```
+
+#### Deliverables:
+- Validation middleware
+- Error handling system
+
+---
+
+### Phase 9: Logging & Monitoring (2 hours)
+
+**Objective**: Add structured logging
+
+#### Tasks:
+- Install Winston or Pino
+- Configure log levels
+- Add request logging
+- Set up log rotation
+
+#### Commands:
+```bash
+npm install winston
+```
+
+#### Deliverables:
+- Structured logging system
+- Request/response logging
+
+---
+
+### Phase 10: Project Structure (2 hours)
+
+**Objective**: Organize code into layers
+
+#### Tasks:
+- Create layered architecture
+- Separate controllers, services, repositories
+- Add dependency injection
+- Refactor existing code
+
+#### Deliverables:
+```
+src/
+├── controllers/    # Request handlers
+├── services/      # Business logic
+├── repositories/  # Data access
+├── middlewares/   # Custom middleware
+├── types/         # TypeScript types
+├── utils/         # Utilities
+└── config/        # Configuration
+```
+
+---
+
+### Future Feature Phases (3-4 hours each)
+
+**Phase 11**: Basic web crawling
+**Phase 12**: URL queue management
+**Phase 13**: Screenshot capture
+**Phase 14**: SEO analysis engine
+**Phase 15**: Data storage models
+**Phase 16**: REST API endpoints
+**Phase 17**: Rate limiting & throttling
+**Phase 18**: Error handling & retries
+**Phase 19**: Reporting system
+**Phase 20**: Dashboard UI
+
