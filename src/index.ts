@@ -3,6 +3,8 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
+import swaggerUi from 'swagger-ui-express';
+import { specs } from './config/swagger';
 
 dotenv.config();
 
@@ -16,7 +18,35 @@ app.use(morgan('combined'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Health check endpoint
+// API Documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
+  explorer: true,
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: 'SiteScope API Documentation',
+}));
+
+/**
+ * @swagger
+ * /health:
+ *   get:
+ *     summary: Health check endpoint
+ *     description: Returns the health status of the SiteScope API server
+ *     tags: [Health]
+ *     responses:
+ *       200:
+ *         description: Server is healthy and running
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/HealthResponse'
+ *             example:
+ *               status: "OK"
+ *               message: "SiteScope API is running"
+ *               timestamp: "2025-08-12T06:51:53.012Z"
+ *               version: "1.0.0"
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
+ */
 app.get('/health', (req, res) => {
   res.status(200).json({
     status: 'OK',
@@ -26,7 +56,34 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Basic route
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Welcome endpoint
+ *     description: Returns a welcome message for the SiteScope API
+ *     tags: [Health]
+ *     responses:
+ *       200:
+ *         description: Welcome message
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Welcome message
+ *                 version:
+ *                   type: string
+ *                   description: API version
+ *               required:
+ *                 - message
+ *                 - version
+ *             example:
+ *               message: "Welcome to SiteScope API"
+ *               version: "1.0.0"
+ */
 app.get('/', (req, res) => {
   res.json({
     message: 'Welcome to SiteScope API',
@@ -38,6 +95,7 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 SiteScope server running on port ${PORT}`);
   console.log(`📊 Health check: http://localhost:${PORT}/health`);
+  console.log(`📚 API Documentation: http://localhost:${PORT}/api-docs`);
 });
 
 export default app;

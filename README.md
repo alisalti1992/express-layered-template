@@ -74,17 +74,26 @@ The Docker setup includes:
 
 ## API Documentation
 
-Once running, access the API documentation at:
-- Swagger UI: `http://localhost:3000/api-docs`
-- Health Check: `http://localhost:3000/health`
+The SiteScope API includes comprehensive OpenAPI documentation:
+
+- **Swagger UI**: `http://localhost:3000/api-docs` - Interactive API documentation
+- **Health Check**: `http://localhost:3000/health` - Server health status
+- **Welcome**: `http://localhost:3000/` - API welcome message
+
+### API Features:
+- ✅ OpenAPI 3.0 specification
+- ✅ Interactive Swagger UI interface  
+- ✅ Complete endpoint documentation with examples
+- ✅ Reusable schema components
+- ✅ Standard HTTP error responses
 
 ## Development
 
 This project follows a **phased development approach** with small, focused iterations:
 
-✅ **Phase 1-6**: Foundation Complete (Node.js, Express, Linting, Prisma, Testing, Docker)
-🔄 **Phase 7**: API Documentation (Current)
-📋 **Phase 8-10**: Core Infrastructure (Validation, Logging, Architecture)
+✅ **Phase 1-7**: Foundation Complete (Node.js, Express, Linting, Prisma, Testing, Docker, API Docs)
+🔄 **Phase 8**: Input Validation (Current)
+📋 **Phase 9-10**: Core Infrastructure (Logging, Architecture)
 📋 **Phase 11+**: Feature Development (Crawling, Screenshots, SEO Analysis, Reporting)
 
 See [DEVELOPMENT.md](./DEVELOPMENT.md) for the complete phase-by-phase implementation plan.
