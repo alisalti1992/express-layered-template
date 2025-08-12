@@ -1,0 +1,60 @@
+# Dependency directories
+node_modules/
+npm-debug.log*
+
+# Build outputs
+dist/
+coverage/
+
+# Environment files
+.env
+.env.local
+.env.test
+.env.development
+
+# IDE files
+.vscode/
+.idea/
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+*.md
+docs/
+
+# Test files
+tests/
+jest.config.js
+__tests__/
+*.test.ts
+*.spec.ts
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Temporary folders
+tmp/
+temp/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore

@@ -50,18 +50,27 @@ npx prisma migrate dev
 npm run dev
 ```
 
-### Docker Development
+### Docker Development (Recommended)
 
 ```bash
-# Start all services
-docker-compose up -d
+# Build and start all services
+docker compose up -d
 
 # View logs
-docker-compose logs -f app
+docker compose logs -f app
+
+# Check service status
+docker compose ps
 
 # Stop services
-docker-compose down
+docker compose down
 ```
+
+The Docker setup includes:
+- **Application**: Node.js app with TypeScript build
+- **PostgreSQL**: Database with persistent storage
+- **Redis**: Caching layer for future features
+- **Health Checks**: Monitoring for all services
 
 ## API Documentation
 
@@ -73,9 +82,10 @@ Once running, access the API documentation at:
 
 This project follows a **phased development approach** with small, focused iterations:
 
-- **Phase 1-4**: Foundation (Node.js, Express, Linting, Prisma)
-- **Phase 5-10**: Core Infrastructure (Testing, Docker, Documentation, Validation, Logging, Architecture)
-- **Phase 11+**: Feature Development (Crawling, Screenshots, SEO Analysis, Reporting)
+✅ **Phase 1-6**: Foundation Complete (Node.js, Express, Linting, Prisma, Testing, Docker)
+🔄 **Phase 7**: API Documentation (Current)
+📋 **Phase 8-10**: Core Infrastructure (Validation, Logging, Architecture)
+📋 **Phase 11+**: Feature Development (Crawling, Screenshots, SEO Analysis, Reporting)
 
 See [DEVELOPMENT.md](./DEVELOPMENT.md) for the complete phase-by-phase implementation plan.
 
