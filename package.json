@@ -1,0 +1,30 @@
+{
+  "name": "sitescope",
+  "version": "1.0.0",
+  "description": "SiteScope is a modern Node.js Express application for SEO website crawling, screenshotting, and comprehensive reporting.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "type-check": "tsc --noEmit",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moveaheadmedia/sitescope.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moveaheadmedia/sitescope/issues"
+  },
+  "homepage": "https://github.com/moveaheadmedia/sitescope#readme",
+  "devDependencies": {
+    "@types/node": "^24.2.1",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}
