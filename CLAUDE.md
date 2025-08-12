@@ -64,7 +64,8 @@ docker-compose logs      # View logs
 ✅ Phase 2: Express.js Foundation - COMPLETED  
 ✅ Phase 3: Code Quality Setup - COMPLETED
 ✅ Phase 4: Prisma Setup - COMPLETED
-🔄 Phase 5: Testing Framework (Current)
+✅ Phase 5: Testing Framework - COMPLETED
+🔄 Phase 6: Docker Setup (Current)
 - See DEVELOPMENT.md for complete phase breakdown
 
 ## Current Project Structure
@@ -76,17 +77,22 @@ docker-compose logs      # View logs
 │   ├── generated/
 │   │   └── prisma/        # Generated Prisma client (gitignored)
 │   └── index.ts           # Express server with middleware & health check
+├── tests/
+│   ├── setup.ts           # Jest test setup
+│   └── health.test.ts     # API tests for health endpoint
 ├── prisma/
 │   └── schema.prisma      # Database schema with User, CrawlJob, Page models
 ├── dist/                  # Compiled JavaScript output
 ├── node_modules/          # Dependencies
-├── package.json           # Project config with Prisma dependencies
+├── package.json           # Project config with Jest and testing dependencies
 ├── package-lock.json      # Dependency lock file
-├── tsconfig.json          # TypeScript configuration
+├── tsconfig.json          # TypeScript configuration (with Jest types)
+├── jest.config.js         # Jest testing configuration
 ├── eslint.config.js       # ESLint configuration
 ├── .prettierrc            # Prettier formatting rules
 ├── .prettierignore        # Prettier ignore patterns
 ├── .env                   # Database connection string
+├── .env.test              # Test environment variables
 ├── .env.example           # Environment variables template
 ├── .gitignore            # Git ignore rules
 ├── DEVELOPMENT.md         # Phase-by-phase development plan
@@ -134,9 +140,12 @@ src/
 - Generated client available with full type safety
 
 ### Testing
-- Write tests for all endpoints
-- Use Supertest for API testing
+- Write tests for all endpoints using Jest and Supertest
+- Tests located in `tests/` directory with separate test environment
+- Use `npm test` to run all tests, `npm run test:watch` for development
+- Test configuration: jest.config.js with TypeScript support
 - Maintain >80% test coverage
+- Current tests: health endpoint validation
 
 ### API Design
 - Follow RESTful conventions
