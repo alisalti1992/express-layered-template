@@ -1,12 +1,13 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import morgan from 'morgan';
 import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
 import { specs } from './config/swagger';
+import { logger, createContextLogger } from './config/logger';
 import { globalLimiter } from './middlewares/rateLimiter';
 import { errorHandler, notFoundHandler } from './middlewares/errorHandler';
+import { requestLogger, errorLogger, skipLogging } from './middlewares/logging';
 import { ApiResponseUtils } from './utils/apiResponse';
 import demoRoutes from './routes/demo';
 
@@ -15,13 +16,16 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Create server logger
+const serverLogger = createContextLogger('SERVER');
+
 // Security & Rate Limiting
 app.use(helmet());
 app.use(cors());
 app.use(globalLimiter);
 
-// Logging
-app.use(morgan('combined'));
+// Request logging
+app.use(requestLogger);
 
 // Body parsing
 app.use(express.json({ limit: '10mb' }));
@@ -104,14 +108,28 @@ app.get('/', (req, res) => {
 app.use('/api/demo', demoRoutes);
 
 // Error handling (must be last)
+app.use(errorLogger);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 SiteScope server running on port ${PORT}`);
-  console.log(`📊 Health check: http://localhost:${PORT}/health`);
-  console.log(`📚 API Documentation: http://localhost:${PORT}/api-docs`);
+  serverLogger.info('SiteScope server started', {
+    port: PORT,
+    environment: process.env.NODE_ENV || 'development',
+    endpoints: {
+      health: `http://localhost:${PORT}/health`,
+      docs: `http://localhost:${PORT}/api-docs`,
+      api: `http://localhost:${PORT}/api`,
+    }
+  });
+  
+  // Keep console logs for immediate feedback during development
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(`🚀 SiteScope server running on port ${PORT}`);
+    console.log(`📊 Health check: http://localhost:${PORT}/health`);
+    console.log(`📚 API Documentation: http://localhost:${PORT}/api-docs`);
+  }
 });
 
 export default app;
