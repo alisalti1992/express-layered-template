@@ -60,7 +60,7 @@ export function validateRequest(schemas: ValidationSchemas) {
 }
 
 function formatZodErrors(error: ZodError, source: string): ValidationError[] {
-  return (error as any).errors.map((err: any) => ({
+  return error.issues.map((err) => ({
     field: `${source}.${err.path.join('.')}`,
     message: err.message,
     code: err.code,
