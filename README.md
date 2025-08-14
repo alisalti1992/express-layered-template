@@ -1,13 +1,12 @@
-# SiteScope
+# Express Layered Architecture Template
 
-SiteScope is a modern Node.js Express application for SEO website crawling, screenshotting, and comprehensive reporting.
+A production-ready Node.js Express template with layered architecture, built with TypeScript and modern development practices.
 
 ## Tech Stack
 
 - **Backend**: Node.js with Express.js framework
 - **Database**: PostgreSQL with Prisma ORM
 - **Language**: TypeScript
-- **Testing**: Jest with Supertest
 - **Validation**: Zod for input validation
 - **Documentation**: Swagger/OpenAPI
 - **Logging**: Winston structured logging
@@ -15,12 +14,14 @@ SiteScope is a modern Node.js Express application for SEO website crawling, scre
 
 ## Features
 
-- **Website Crawling**: Intelligent web crawling with queue management
-- **Screenshot Capture**: Automated screenshot generation using Puppeteer
-- **SEO Analysis**: Comprehensive SEO metrics and analysis
-- **RESTful API**: Well-documented API endpoints
-- **Rate Limiting**: Request throttling and protection
-- **Reporting**: Detailed analytics and reporting system
+- **Layered Architecture**: Clean separation of controllers, services, and repositories
+- **Type Safety**: Full TypeScript support with strict configuration
+- **Input Validation**: Zod-based request validation with detailed error handling
+- **API Documentation**: Interactive Swagger UI with OpenAPI 3.0
+- **Structured Logging**: Winston-based logging with rotation and redaction
+- **Rate Limiting**: Configurable request throttling
+- **Docker Support**: Complete containerization with PostgreSQL and Redis
+- **Code Quality**: ESLint, Prettier, and automated formatting
 
 ## Quick Start
 
@@ -29,12 +30,12 @@ SiteScope is a modern Node.js Express application for SEO website crawling, scre
 - PostgreSQL 14+
 - Docker (optional)
 
-### Local Development
+### Using This Template
 
 ```bash
-# Clone repository
-git clone <repository-url>
-cd sitescope
+# Use this template to create a new project
+git clone <your-template-url> your-project-name
+cd your-project-name
 
 # Install dependencies
 npm install
@@ -44,7 +45,8 @@ cp .env.example .env
 # Edit .env with your database credentials
 
 # Set up database
-npx prisma migrate dev
+npx prisma dev              # Start Prisma Postgres server
+npx prisma generate         # Generate Prisma client
 
 # Start development server
 npm run dev
@@ -74,7 +76,7 @@ The Docker setup includes:
 
 ## API Documentation
 
-The SiteScope API includes comprehensive OpenAPI documentation:
+This template includes comprehensive OpenAPI documentation:
 
 - **Swagger UI**: `http://localhost:3000/api-docs` - Interactive API documentation
 - **Health Check**: `http://localhost:3000/health` - Server health status
@@ -87,16 +89,17 @@ The SiteScope API includes comprehensive OpenAPI documentation:
 - ✅ Reusable schema components
 - ✅ Standard HTTP error responses
 
-## Development
+## Template Architecture
 
-This project follows a **phased development approach** with small, focused iterations:
+This template implements a **layered architecture pattern** with complete separation of concerns:
 
-✅ **Phase 1-7**: Foundation Complete (Node.js, Express, Linting, Prisma, Testing, Docker, API Docs)
-🔄 **Phase 8**: Input Validation (Current)
-📋 **Phase 9-10**: Core Infrastructure (Logging, Architecture)
-📋 **Phase 11+**: Feature Development (Crawling, Screenshots, SEO Analysis, Reporting)
+✅ **Controllers Layer**: HTTP request/response handling
+✅ **Services Layer**: Business logic and data processing  
+✅ **Repository Layer**: Database access abstraction
+✅ **Middleware**: Cross-cutting concerns (validation, logging, error handling)
+✅ **Type System**: Full TypeScript interfaces and contracts
 
-See [DEVELOPMENT.md](./DEVELOPMENT.md) for the complete phase-by-phase implementation plan.
+See [TEMPLATE_USAGE.md](./TEMPLATE_USAGE.md) for detailed setup and customization instructions.
 
 ## Scripts
 

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-SiteScope is a Node.js Express application for SEO website crawling, screenshotting, and reporting.
+This is an Express Layered Architecture Template - a production-ready Node.js Express template with clean layered architecture, built with TypeScript and modern development practices.
 
 ## Tech Stack
 
@@ -176,15 +176,17 @@ The project now follows a proper layered architecture:
 
 ## Architecture Notes
 
-This is a layered Node.js Express application with:
+This template provides a layered Node.js Express application with:
 - **Controllers**: Handle HTTP requests/responses
 - **Services**: Business logic and data processing
 - **Repositories**: Database access abstraction
 - **Middlewares**: Cross-cutting concerns (auth, validation, logging)
 
-### Core Features (Future Phases):
-- Website crawling with queue management
-- Screenshot capture using Puppeteer
-- SEO analysis engine
-- Rate limiting and request throttling
-- Comprehensive reporting system
+### Template Features:
+- Complete layered architecture implementation
+- Type-safe database operations with Prisma
+- Input validation with Zod and detailed error handling
+- Structured logging with Winston and request tracking
+- API documentation with Swagger/OpenAPI
+- Docker containerization with PostgreSQL and Redis
+- Code quality tools (ESLint, Prettier, TypeScript)
