@@ -8,7 +8,8 @@ import { logger, createContextLogger } from './config/logger';
 import { globalLimiter } from './middlewares/rateLimiter';
 import { errorHandler, notFoundHandler } from './middlewares/errorHandler';
 import { requestLogger, errorLogger, skipLogging } from './middlewares/logging';
-import { ApiResponseUtils } from './utils/apiResponse';
+import { ResponseHelper } from './utils/responseHelper';
+import { HealthController } from './controllers/healthController';
 import demoRoutes from './routes/demo';
 
 dotenv.config();
@@ -18,6 +19,9 @@ const PORT = process.env.PORT || 3000;
 
 // Create server logger
 const serverLogger = createContextLogger('SERVER');
+
+// Initialize controllers
+const healthController = new HealthController();
 
 // Security & Rate Limiting
 app.use(helmet());
@@ -60,14 +64,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
-app.get('/health', (req, res) => {
-  res.status(200).json({
-    status: 'OK',
-    message: 'SiteScope API is running',
-    timestamp: new Date().toISOString(),
-    version: '1.0.0',
-  });
-});
+app.get('/health', healthController.healthCheck);
 
 /**
  * @swagger
@@ -98,7 +95,7 @@ app.get('/health', (req, res) => {
  *               version: "1.0.0"
  */
 app.get('/', (req, res) => {
-  ApiResponseUtils.success(res, {
+  ResponseHelper.success(res, {
     message: 'Welcome to SiteScope API',
     version: '1.0.0',
   });
